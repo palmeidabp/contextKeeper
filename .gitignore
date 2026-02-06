@@ -1,23 +1,9 @@
-# Python
+node_modules/
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-
-# Database (keep schema, ignore data)
-*.db
-*.db-journal
-
-# Agent relay logs
+*.pyc
 .agent-relay/
+*.db
 *.log
-*.sock
-*.pid
-
-# Environment
-.env
-.venv/
-
-# IDE
-.vscode/
-.idea/
+prpm.lock
+package-lock.json
+package.json

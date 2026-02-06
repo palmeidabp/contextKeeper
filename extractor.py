@@ -6,23 +6,25 @@ import json
 import re
 
 
+CATEGORY_KEYWORDS = {
+    'action': ['todo', 'task', 'action item', 'follow up', 'need to', 'must'],
+    'meeting_note': ['meeting', 'discussed', 'agreed', 'decided'],
+    'idea': ['idea', 'thought', 'consider'],
+    'question': ['question', 'how to', 'what is', 'why'],
+    'issue': ['bug', 'error', 'problem', 'fix'],
+}
+
+
 def categorize_content(text):
     """Categorize content based on keywords and patterns."""
     text_lower = text.lower()
-    
-    # Define category patterns
-    if any(kw in text_lower for kw in ['todo', 'task', 'action item', 'follow up']):
-        return 'action'
-    elif any(kw in text_lower for kw in ['meeting', 'discussed', 'agreed', 'decided']):
-        return 'meeting_note'
-    elif any(kw in text_lower for kw in ['idea', 'thought', 'consider', 'maybe']):
-        return 'idea'
-    elif any(kw in text_lower for kw in ['question', 'how to', 'what is', 'why']):
-        return 'question'
-    elif any(kw in text_lower for kw in ['bug', 'error', 'issue', 'problem', 'fix']):
-        return 'issue'
-    else:
-        return 'note'
+
+    # Check each category's keywords
+    for category, keywords in CATEGORY_KEYWORDS.items():
+        if any(kw in text_lower for kw in keywords):
+            return category
+
+    return 'note'
 
 
 def extract_keywords(text, max_keywords=5):
